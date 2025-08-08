@@ -11,11 +11,12 @@ import (
 	"time"
 )
 
-const timeMonitorings = 3
-const sleepingMonitoring = 5
+const (
+	timeMonitorings    = 3
+	sleepingMonitoring = 5
+)
 
 func main() {
-
 	showIntroduction()
 
 	for {
@@ -34,11 +35,10 @@ func main() {
 			fmt.Println("Exiting Program...")
 			os.Exit(0)
 		default:
-			fmt.Println("This command is unknow")
+			fmt.Println("This command is unknown")
 			os.Exit(-1)
 		}
 	}
-
 }
 
 func showIntroduction() {
@@ -64,7 +64,6 @@ func digitUser() int {
 }
 
 func startMonitoring() {
-
 	fmt.Println("")
 
 	fmt.Println("Monitoring...")
@@ -87,13 +86,12 @@ func startMonitoring() {
 
 func testingSites(site string) {
 	resp, err := http.Get(site)
-
 	if err != nil {
 		fmt.Println("Error in program!", err)
 	}
 
 	if resp.StatusCode == 200 {
-		fmt.Println("Site ", site, "Uploaded with sucessfull")
+		fmt.Println("Site ", site, "Uploaded with successful")
 		registerLogs(site, true)
 	} else {
 		fmt.Println("Site ", site, "Have problems! Status code: ", resp.StatusCode)
@@ -102,11 +100,9 @@ func testingSites(site string) {
 }
 
 func readSitesArquives() []string {
-
 	var sites []string
 
 	arquivo, err := os.Open("sites.txt")
-
 	if err != nil {
 		fmt.Println("Error in program!", err)
 	}
@@ -129,12 +125,17 @@ func readSitesArquives() []string {
 
 func registerLogs(site string, status bool) {
 	arquivo, err := os.OpenFile("logs.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-
 	if err != nil {
 		fmt.Println("Have problem in program :", err)
 	}
 
-	arquivo.WriteString(time.Now().Format("02/01/2006 15:04:05") + " - " + site + " - Online: " + strconv.FormatBool(status) + "\n")
+	arquivo.WriteString(
+		time.Now().
+			Format("02/01/2006 15:04:05") +
+			" - " + site + " - Online: " + strconv.FormatBool(
+			status,
+		) + "\n",
+	)
 
 	arquivo.Close()
 }
@@ -164,7 +165,6 @@ func clearLogs() {
 
 	logsLimpo := "logs.txt"
 	arquivo, err := os.OpenFile(logsLimpo, os.O_WRONLY|os.O_TRUNC, 0644)
-
 	if err != nil {
 		fmt.Println("Have problem in program: ", err)
 	}
