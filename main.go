@@ -41,8 +41,17 @@ func main() {
 	}
 }
 
+func getNamePc() string {
+	hostname, err := os.Hostname()
+	if err != nil {
+		fmt.Println("Don't possible get hostname")
+		return "Unknown"
+	}
+	return hostname
+}
+
 func showIntroduction() {
-	name := "Yuri"
+	name := getNamePc()
 	var version float32 = 1.1
 	fmt.Println("Welcome sr. ", name)
 	fmt.Println("Version this program is ", version)
