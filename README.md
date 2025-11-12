@@ -1,46 +1,133 @@
-# **Guia de Uso do Software de Monitoramento de Sites**
+# 🔍 Monitoramento de Sites
 
-## **📥 Download e Organização**
+Sistema de monitoramento HTTP desenvolvido em Go para verificar a disponibilidade e performance de websites em tempo real.
 
-- Crie uma pasta no seu computador.
-- Baixe os arquivos do projeto e coloque dentro dessa pasta **ou** faça um clone do repositório em uma pasta já existente.
-  > Caso a pasta ainda não exista, crie-a antes.
+## 🎯 Sobre o Projeto
+
+Aplicação CLI (Command Line Interface) que realiza requisições HTTP periódicas para monitorar o status de sites, registrando tempo de resposta e disponibilidade. Ideal para DevOps, SRE e desenvolvedores que precisam garantir uptime de aplicações.
+
+## ⚡ Tecnologias Utilizadas
+
+- **Go (Golang)** - Linguagem de programação
+- **HTTP Client nativo** - Requisições HTTP
+- **Goroutines** - Concorrência e paralelismo
+- **JSON** - Persistência de configurações
+
+## ✨ Funcionalidades
+
+- ✅ Monitoramento contínuo de múltiplos sites simultaneamente
+- ✅ Verificação de status HTTP (200, 404, 500, etc)
+- ✅ Medição de tempo de resposta
+- ✅ Registro de histórico de disponibilidade
+- ✅ Alertas quando sites ficam fora do ar
+- ✅ Execução concorrente usando Goroutines
+
+## 🚀 Como Usar
+
+### Pré-requisitos
+
+- [Go 1.19+](https://golang.org/dl/) instalado
+
+### Instalação
+
+```bash
+# Clone o repositório
+git clone https://github.com/YuriLuiz1/monitoramento-sites.git
+cd monitoramento-sites
+
+# Baixe as dependências
+go mod download
+
+# Compile o projeto
+go build -o monitor
+```
+
+### Configuração
+
+Crie um arquivo `sites.txt` com os sites que deseja monitorar:
+
+```txt **Nesse mesmo formato abaixo**
+https://www.google.com.br
+https://www.youtube.com.br
+```
+
+### Execução
+
+```bash
+# Execute o monitoramento
+./monitor
+
+# Ou diretamente com Go
+go run main.go
+```
+
+## 📊 Exemplo de Saída
+
+```
+[2024-10-28 14:30:15] ✅ https://google.com - Status: 200 - Tempo: 145ms
+[2024-10-28 14:30:15] ✅ https://github.com - Status: 200 - Tempo: 289ms
+[2024-10-28 14:30:16] ❌ https://siteindisponivel.com - Status: 0 - ERRO: timeout
+
+## 🏗️ Estrutura do Código
+
+```
+monitoramento-sites/
+├── main.go              # Ponto de entrada
+├── monitor/
+│   ├── checker.go       # Lógica de verificação HTTP
+│   ├── logger.go        # Sistema de logs
+│   └── config.go        # Gerenciamento de configurações
+├── sites.json           # Lista de sites para monitorar
+├── logs/                # Diretório de logs históricos
+└── go.mod
+```
+
+## 🔧 Conceitos de Go Aplicados
+
+Este projeto demonstra o uso de:
+
+- **HTTP Client** - Requisições HTTP com timeout personalizado
+- **Error Handling** - Tratamento robusto de erros
+- **Time e Ticker** - Execução periódica
+- **Logging** - Registro estruturado de eventos
+
+## 📈 Melhorias Futuras
+
+- [ ] Interface web para visualização em tempo real
+- [ ] Notificações por email/Slack/Discord
+- [ ] Métricas de uptime (99.9%, 99.99%)
+- [ ] Gráficos de tempo de resposta
+- [ ] Suporte a autenticação HTTP
+- [ ] Docker container para facilitar deploy
+- [ ] Exportação de métricas para Prometheus
+
+## 💡 Por que Go?
+
+Go foi escolhido para este projeto por:
+
+- **Performance**: Requisições HTTP concorrentes extremamente rápidas
+- **Concorrência nativa**: Goroutines facilitam monitoramento paralelo
+- **Binário único**: Deploy simplificado sem dependências
+- **Baixo consumo de recursos**: Ideal para rodar 24/7
+
+## 🎓 Aprendizados
+
+Desenvolvi este projeto para:
+- Trabalhar com HTTP clients e timeouts
+- Implementar sistemas de logging
+- Criar aplicações CLI úteis e práticas
+
+## 👤 Autor
+
+**Yuri Luiz**
+
+- GitHub: [@YuriLuiz1](https://github.com/YuriLuiz1)
+- LinkedIn: [https://www.linkedin.com/in/yuri-luiz/]
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT.
 
 ---
 
-## **🚀 Passo a Passo para Execução Correta do Software**
-
-1. Dentro da pasta criada onde você guardou os arquivos, abra o arquivo **SITES.TXT**.
-2. Escreva os links dos sites que deseja monitorar no seguinte formato:  
-   `https://www.google.com.br`
-3. Execute o binário do arquivo (`.exe`).
-
----
-
-## **🧭 Utilização**
-
-- **Opção 1**  
-  Inicia o monitoramento dos sites, enviando requisições via protocolo **HTTPS** e retornando o **status code** de cada site.
-
-- **Opção 2**  
-  Exibe os **logs** de cada monitoramento realizado, juntamente com seus respectivos **status codes**.
-
-- **Opção 3**  
-  Limpa os **logs** registrados.
-
-- **Opção 0**  
-  Finaliza o software.
-
----
-
-## **📝 Observações Importantes**
-
-- Todos os logs podem ser apagados **manualmente** acessando o arquivo **logs.txt**.
-- **Não é necessário criar o arquivo logs.txt manualmente** — ele será criado automaticamente pelo software caso não exista na pasta onde o binário está sendo executado.
-- Para o funcionamento correto do software, é **essencial** que os sites estejam listados corretamente no arquivo **SITES.TXT**.
-
----
-
-## **🙏 Agradecimento**
-
-Obrigado pelo uso do programa! 😄
+💚 Desenvolvido com Go | ⭐ Deixe uma estrela se foi útil!
