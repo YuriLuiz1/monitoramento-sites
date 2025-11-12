@@ -68,8 +68,6 @@ go run main.go
 [2024-10-28 14:30:15] ✅ https://github.com - Status: 200 - Tempo: 289ms
 [2024-10-28 14:30:16] ❌ https://siteindisponivel.com - Status: 0 - ERRO: timeout
 
-## 🏗️ Estrutura do Código
-
 ```
 monitoramento-sites/
 ├── main.go              # Ponto de entrada
